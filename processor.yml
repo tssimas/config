@@ -27,7 +27,7 @@ processor:
       find-by-id: /users/{id}
       basic-auth:
         username: username
-        password: username
+        password: '{cipher}AQAixu5bZeed1VdqBfzwsMTlGg9NCrMOK65yPOUcue5n/sQx32BOcqSld3ww5rvkWXcigKpjZ+4cSJOP+g1pxp8g4pnKFTc1FM6rj76d9EXqWCHjOLmrHBDsDLzx2Y2aA3gqtdd3L8vmo57dL4z9yUSwOYpc4XiTdsrgqUusBnubAndHmkhJ9ME2sODJwz8/HfvLRjpxoDiRDXp82udGYXMSLU+ELoqGcGgl5x55wTDTd05PfJJ03wtRGsC5FunfGRjoOhChyartrM4NFPj4yk/wUfWxkF3rE1r2l0SiKvDuilE/WIGXp1S97xh+UzyecvNaZr5lsKldlZ5uT499dm2v5ftmtaNqDCLTSGL//iBrAjIDGj99+ooqLLB6G+TEYvE='
 
 security:
   oauth2:
@@ -44,7 +44,7 @@ spring:
   datasource:
     url: jdbc:oracle:thin:@//localhost:1521/database
     username: username
-    password: 'password'
+    password: '{cipher}AQAixu5bZeed1VdqBfzwsMTlGg9NCrMOK65yPOUcue5n/sQx32BOcqSld3ww5rvkWXcigKpjZ+4cSJOP+g1pxp8g4pnKFTc1FM6rj76d9EXqWCHjOLmrHBDsDLzx2Y2aA3gqtdd3L8vmo57dL4z9yUSwOYpc4XiTdsrgqUusBnubAndHmkhJ9ME2sODJwz8/HfvLRjpxoDiRDXp82udGYXMSLU+ELoqGcGgl5x55wTDTd05PfJJ03wtRGsC5FunfGRjoOhChyartrM4NFPj4yk/wUfWxkF3rE1r2l0SiKvDuilE/WIGXp1S97xh+UzyecvNaZr5lsKldlZ5uT499dm2v5ftmtaNqDCLTSGL//iBrAjIDGj99+ooqLLB6G+TEYvE='
     driver:
       class: oracle.jdbc.driver.OracleDriver
     initialize: false
@@ -74,7 +74,7 @@ spring:
     port: 5672
     virtual-host: vhost
     username: username
-    password: password
+    password: '{cipher}AQAixu5bZeed1VdqBfzwsMTlGg9NCrMOK65yPOUcue5n/sQx32BOcqSld3ww5rvkWXcigKpjZ+4cSJOP+g1pxp8g4pnKFTc1FM6rj76d9EXqWCHjOLmrHBDsDLzx2Y2aA3gqtdd3L8vmo57dL4z9yUSwOYpc4XiTdsrgqUusBnubAndHmkhJ9ME2sODJwz8/HfvLRjpxoDiRDXp82udGYXMSLU+ELoqGcGgl5x55wTDTd05PfJJ03wtRGsC5FunfGRjoOhChyartrM4NFPj4yk/wUfWxkF3rE1r2l0SiKvDuilE/WIGXp1S97xh+UzyecvNaZr5lsKldlZ5uT499dm2v5ftmtaNqDCLTSGL//iBrAjIDGj99+ooqLLB6G+TEYvE='
 
 hystrix:
   command:
