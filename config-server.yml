@@ -58,3 +58,9 @@ config-server:
       - name: config-file
         path: /*/*
         required-roles: ADMIN, CONFIG_USER
+
+logging:
+  pattern:
+    console: "%date{dd/MM/yyyy E HH:mm:ss.SSS} - [%X{mdcId}] - [%p] - [%thread] - %c:%line - %m %n"
+  level:
+    com.tssimas.configserver: DEBUG
