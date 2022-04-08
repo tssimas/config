@@ -64,5 +64,4 @@ logging:
     console: "%date{dd/MM/yyyy E HH:mm:ss.SSS} - [%X{mdcId}] - [%p] - [%thread] - %c:%line - %m %n"
   level:
     com.tssimas.configserver: DEBUG
-    org.springframework.cloud.config: DEBUG
-    org.springframework.cloud.bootstrap.config: DEBUG
+    org.springframework.cloud: DEBUG
