@@ -1,0 +1,90 @@
+server:
+  port: 9413
+  maxHttpHeaderSize: 16384
+processor:
+  cnpj-visao-interna: '00000000000000'
+  cron: "0 0/5 * * * *"
+  thread:
+    time: 360000
+  conversion:
+    path: /procfiles
+    format: .csv
+    max-records-per-file: 100000
+    custom-header:
+      - HEADER1
+      - HEADER2
+      - HEADER3
+  file-process:
+    allow-patterns:
+      - csv
+      - txt
+  soa-errors-status-code:
+    status:
+      'AssinanteNaoEncontradoFault': 400
+  integration:
+    test-client:
+      base-url: http://localhost:9401
+      find-by-id: /users/{id}
+      basic-auth:
+        username: username
+        password: username
+
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:9401/oauth/details
+
+spring:
+  cloud:
+    config:
+      override-none: true
+      override-system-properties: false
+  jackson:
+    serialization.write-dates-as-timestamps: false
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/database
+    username: username
+    password: 'password'
+    driver:
+      class: oracle.jdbc.driver.OracleDriver
+    initialize: false
+    hikari:
+      pool-name: alert
+      connection-timeout: 60000
+      minimum-idle: 3
+      maximum-pool-size: 100
+      leak-detection-threshold: 60000
+      connection-init-sql: SELECT 1 FROM DUAL
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+      dialect: org.hibernate.dialect.Oracle12cDialect
+  cache:
+    cache-names: clientIdCache
+    caffeine:
+      spec: expireAfterWrite=5s,recordStats
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtual-host: vhost
+    username: username
+    password: password
+
+hystrix:
+  command:
+    'DeviceClient#getDevices(authorization,companyCnpj,companyId,userId,page,size).execution.isolation.thread.timeoutInMilliseconds': 1200000
+
+logging:
+  pattern:
+    console: "%date{dd/MM/yyyy E HH:mm:ss.SSS} - [%X{mdcId}] - [%p] - [%thread] - %c:%line - %m %n"
+  level:
+    org.hibernate.type: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate: INFO
+    org.springframework.amqp.rabbit.RabbitListenerEndpointContainer: DEBUG

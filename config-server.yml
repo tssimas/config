@@ -1,0 +1,60 @@
+server:
+  port: ${PORT:9400}
+  
+spring:
+  mvc:
+    media-types:
+      bin: application/octet-stream
+    contentnegotiation:
+      media-types:
+        bin: application/octet-stream
+  cloud:
+    config:
+      server:
+        git:
+          repos:
+            m2m:
+              #pattern: *
+              uri: https://github.com/tssimas/config.git
+              basedir: '${user.home}/${spring.application.name}/config'
+              timeout: 10
+              cloneOnStart: true
+              forcePull: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  
+config-server:
+  security:
+    clients:
+      - username: admin
+        password: admin
+        admin: true
+        roles: ADMIN, CONFIG_USER, CIPHER
+      - username: config-server
+        password: config-server
+        roles: CONFIG_USER
+      - username: cipher-agent
+        password: cipher-agent
+        roles: CIPHER
+    paths:
+      - name: health
+        path: /actuator/health
+      - name: actuator
+        path: /actuator/**
+        required-roles: ADMIN
+      - name: encrypt
+        path: /encrypt
+        required-roles: ADMIN, CIPHER
+      - name: decrypt
+        path: /decrypt
+        required-roles: ADMIN, CIPHER
+      - name: plain-file
+        path: /*///*
+        required-roles: ADMIN, CONFIG_USER
+      - name: config-file
+        path: /*/*
+        required-roles: ADMIN, CONFIG_USER
